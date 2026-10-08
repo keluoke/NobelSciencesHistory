@@ -1,0 +1,7 @@
+{
+  "name": "NobelPhysics - 诺贝尔物理学奖互动全景",
+  "description": "探索百年诺贝尔物理学奖历史演进：融合全景时间轴、经典实验交互模拟沙盒、索尔维群星谱系与深浅兼具的物理学重大发现解读。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
