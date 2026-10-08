@@ -30,19 +30,19 @@ export const SimulationLabModal: React.FC<Props> = ({ initialSimId = 'photoelect
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md">
-      <div className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-2xl">
+      <div className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#0E0E14] border border-white/[0.12] shadow-2xl flex flex-col">
         {/* Header Bar */}
-        <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
-              <Atom className="w-4 h-4" />
+        <div className="sticky top-0 z-20 flex items-center justify-between px-8 py-5 bg-[#0E0E14]/90 backdrop-blur-3xl border-b border-white/[0.1]">
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400">
+              <Atom className="w-5 h-5 animate-spin" style={{ animationDuration: '8s' }} />
             </div>
             <div>
-              <h3 className="text-base font-semibold text-white">
+              <h3 className="text-lg sm:text-xl font-bold text-white font-display tracking-tight">
                 诺贝尔三大科学奖重大实验 · 互动模拟沙盒实验室
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs sm:text-sm text-neutral-300 font-normal">
                 可调参数的真实物理学、分子生物化学与现代医学微观动态沙盒
               </p>
             </div>
@@ -50,7 +50,7 @@ export const SimulationLabModal: React.FC<Props> = ({ initialSimId = 'photoelect
 
           <button
             onClick={onClose}
-            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-2.5 rounded-full text-neutral-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             title="关闭窗口"
           >
             <X className="w-5 h-5" />
@@ -58,8 +58,8 @@ export const SimulationLabModal: React.FC<Props> = ({ initialSimId = 'photoelect
         </div>
 
         {/* Tab switcher */}
-        <div className="px-6 pt-3 pb-1 border-b border-slate-800/80 bg-slate-950/40">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+        <div className="px-8 pt-4 pb-2 border-b border-white/[0.08] bg-black/50">
+          <div className="flex items-center gap-2.5 overflow-x-auto pb-2 scrollbar-none">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -67,19 +67,19 @@ export const SimulationLabModal: React.FC<Props> = ({ initialSimId = 'photoelect
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
+                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm'
-                      : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 border border-slate-800/60 hover:bg-slate-800/50'
+                      ? 'bg-white text-black shadow-lg scale-102 font-bold'
+                      : 'bg-white/[0.05] text-neutral-300 hover:text-white hover:bg-white/[0.1] border border-white/[0.08]'
                   }`}
                 >
-                  <Icon className="w-3.5 h-3.5 shrink-0" />
+                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-black' : tab.tagColor}`} />
                   <div className="text-left">
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1.5">
                       <span>{tab.label}</span>
-                      <span className={`text-[9px] ${tab.tagColor}`}>[{tab.tag}]</span>
+                      <span className={`text-[10px] font-bold ${isActive ? 'text-neutral-700' : tab.tagColor}`}>[{tab.tag}]</span>
                     </div>
-                    <div className="text-[10px] opacity-70 font-normal">{tab.sub}</div>
+                    <div className={`text-[11px] font-normal ${isActive ? 'text-neutral-700' : 'text-neutral-400'}`}>{tab.sub}</div>
                   </div>
                 </button>
               );
@@ -88,7 +88,7 @@ export const SimulationLabModal: React.FC<Props> = ({ initialSimId = 'photoelect
         </div>
 
         {/* Simulator body */}
-        <div className="p-6">
+        <div className="p-8">
           {activeTab === 'photoelectric' && <PhotoelectricSimulator />}
           {activeTab === 'bohr_atom' && <BohrAtomSimulator />}
           {activeTab === 'double_slit' && <DoubleSlitSimulator />}

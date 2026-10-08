@@ -72,7 +72,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100 font-sans selection:bg-amber-500/20 selection:text-amber-200">
+    <div className="min-h-screen flex flex-col bg-[#000000] text-[#F5F5F7] font-sans selection:bg-amber-400/25 selection:text-amber-200">
       {/* Top Bar Header */}
       <Header
         activeView={activeView}
@@ -94,7 +94,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-8 py-10">
         {activeView === 'timeline' && (
           <TimelineView
             awards={filteredAwards}
@@ -148,16 +148,20 @@ export default function App() {
         />
       )}
 
-      {/* Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-8 px-4 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="font-display font-semibold text-amber-300">NobelSciences</span>
-            <span aria-hidden="true">·</span>
-            <span>物理 · 化学 · 生理学或医学奖百年科学史探索全景</span>
+      {/* Footer - Apple style clean minimal footer */}
+      <footer className="border-t border-white/10 bg-[#000000] py-10 px-6 text-center text-sm text-neutral-400">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <span className="font-display font-bold text-white text-base tracking-tight">NobelSciences</span>
+            <span aria-hidden="true" className="text-neutral-600">·</span>
+            <span className="text-neutral-300">物理 · 化学 · 生理学或医学奖百年科学史探索全景</span>
           </div>
-          <div className="flex items-center gap-4 text-slate-500">
-            <span>官方档案权威考证 · 交互实验模拟沙盒 · 跨学科思想脉络</span>
+          <div className="flex items-center gap-4 text-xs sm:text-sm text-neutral-400">
+            <span>权威官方档案考证</span>
+            <span>·</span>
+            <span>8大交互实验模拟沙盒</span>
+            <span>·</span>
+            <span>跨学科思想传承脉络</span>
           </div>
         </div>
       </footer>

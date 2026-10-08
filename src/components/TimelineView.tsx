@@ -25,11 +25,13 @@ export const TimelineView: React.FC<Props> = ({
   const eras: (HistoricalEra | 'all')[] = ['all', '1901-1920', '1921-1945', '1946-1970', '1971-1999', '2000-now'];
 
   return (
-    <div className="space-y-8">
-      {/* Era Segmented Control */}
-      <div>
-        <div className="text-xs font-semibold text-slate-400 mb-2">历史纪元阶段</div>
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+    <div className="space-y-10">
+      {/* Era Segmented Control - Apple style rounded-full horizontal bar */}
+      <div className="space-y-3.5">
+        <div className="text-sm font-bold tracking-wider text-neutral-400 uppercase">
+          按历史纪元阶段浏览
+        </div>
+        <div className="flex items-center gap-2.5 overflow-x-auto pb-2 scrollbar-none">
           {eras.map((era) => {
             const isActive = selectedEra === era;
             const label = era === 'all' ? '全部纪元 (1901 - 至今)' : ERA_LABELS[era]?.title;
@@ -38,34 +40,38 @@ export const TimelineView: React.FC<Props> = ({
               <button
                 key={era}
                 onClick={() => onSelectEra(era)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+                className={`px-5 py-2.5 rounded-full text-sm sm:text-base font-medium whitespace-nowrap transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-amber-400 text-slate-950 font-semibold shadow-sm'
-                    : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700'
+                    ? 'bg-white text-black font-semibold shadow-xl shadow-white/10 scale-102'
+                    : 'bg-[#1C1C1E]/80 text-neutral-300 hover:text-white border border-white/[0.12] hover:border-white/30 backdrop-blur-xl'
                 }`}
               >
                 <span>{label}</span>
-                <span className="text-[10px] ml-1.5 opacity-70">({range})</span>
+                <span className="text-xs sm:text-sm ml-2 opacity-60">({range})</span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* Awards Count Status & Guidance */}
-      <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 border-b border-slate-800/80 pb-3">
-        <div className="flex items-center gap-2">
-          <span>展示 <span className="font-code text-amber-300 font-semibold">{awards.length}</span> 项深度精选重大科学发现</span>
-          <span className="text-slate-600 hidden sm:inline">|</span>
-          <span className="text-amber-400/90 hidden sm:inline">
-            查看包含战争空缺停发年等百年完整编年？可在顶部导航切换至【历届总录 (1901-2024)】
+      {/* Awards Count Status & Guidance - Apple clean callout */}
+      <div className="p-5 sm:p-6 rounded-3xl bg-white/[0.04] border border-white/[0.1] backdrop-blur-2xl flex flex-wrap items-center justify-between gap-4 text-base text-neutral-300">
+        <div className="flex items-center gap-3">
+          <span className="text-base sm:text-lg font-semibold text-white">
+            展示 <span className="font-code text-amber-400 font-bold text-xl">{awards.length}</span> 项划时代里程碑成果
+          </span>
+          <span className="text-neutral-600 hidden md:inline">|</span>
+          <span className="text-sm sm:text-base text-neutral-400 hidden md:inline">
+            若需查阅包含一战/二战停发年份在内的 1901-2024 完整编年历史，请点击顶部【历届总录】
           </span>
         </div>
-        <div className="text-slate-500">点击卡片可查看深度背景、实验与公式解析</div>
+        <div className="text-xs sm:text-sm text-neutral-400 font-medium">
+          点击任意成果卡片查看全屏深度科学档案与实验原理
+        </div>
       </div>
 
-      {/* Timeline Stream */}
-      <div className="relative border-l-2 border-slate-800 ml-4 sm:ml-32 space-y-8 pl-6 sm:pl-10">
+      {/* Timeline Stream with large typography and Apple glass cards */}
+      <div className="relative border-l-2 border-white/15 ml-4 sm:ml-40 space-y-14 pl-6 sm:pl-14">
         {awards.map((award) => {
           const cat = CATEGORY_LABELS[award.category];
           const disc = DISCIPLINE_LABELS[award.discipline];
@@ -73,44 +79,48 @@ export const TimelineView: React.FC<Props> = ({
           return (
             <div key={award.id} className="relative group">
               {/* Year Marker on Timeline Node */}
-              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 flex items-center">
-                <span className="hidden sm:block absolute -left-28 w-24 text-right font-code text-sm font-bold text-amber-400 tracking-wider">
+              <div className="absolute -left-[33px] sm:-left-[65px] top-4 flex items-center">
+                {/* Desktop Big Year Label */}
+                <span className="hidden sm:block absolute -left-36 w-32 text-right font-code text-3xl font-black text-amber-400 tracking-tight">
                   {award.year}
                 </span>
 
-                {/* Timeline dot */}
-                <div className={`w-3.5 h-3.5 rounded-full border-2 border-slate-950 transition-all ${
+                {/* Apple style glowing circular node */}
+                <div className={`w-4.5 h-4.5 rounded-full border-2 border-black transition-all ${
                   award.milestoneLevel === 1
-                    ? 'bg-amber-400 group-hover:scale-125 ring-4 ring-amber-500/20'
-                    : 'bg-slate-400 group-hover:bg-amber-300'
+                    ? 'bg-amber-400 group-hover:scale-130 ring-4 ring-amber-400/30 shadow-lg shadow-amber-500/50'
+                    : 'bg-neutral-400 group-hover:bg-amber-300'
                 }`} />
               </div>
 
-              {/* Award Content Card */}
+              {/* Award Content Card (Apple Card styling with generous padding and larger text) */}
               <div
                 onClick={() => onSelectAward(award)}
-                className="p-5 rounded-2xl bg-slate-900/60 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:shadow-slate-950/50 group/card"
+                className="apple-card p-7 sm:p-9 rounded-3xl transition-all cursor-pointer group/card border border-white/[0.1] hover:border-white/30"
               >
                 {/* Mobile Year Badge + Metadata */}
-                <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="sm:hidden font-code font-bold text-amber-400 text-sm">
+                <div className="flex flex-wrap items-center justify-between gap-3 text-sm sm:text-base text-neutral-400 mb-3.5">
+                  <div className="flex items-center gap-3">
+                    <span className="sm:hidden font-code font-black text-amber-400 text-xl">
                       {award.year}
                     </span>
-                    <span className="sm:hidden" aria-hidden="true">·</span>
+                    <span className="sm:hidden text-neutral-600" aria-hidden="true">·</span>
 
-                    {/* Discipline indicator */}
-                    <span className={`text-[11px] font-semibold ${disc?.color || 'text-slate-300'}`}>
-                      {disc?.short}
+                    {/* Discipline Pill */}
+                    <span className={`text-xs sm:text-sm font-bold px-3 py-1 rounded-full border ${disc?.badge}`}>
+                      {disc?.label}
                     </span>
-                    <span aria-hidden="true">·</span>
 
-                    <span className={cat?.color || 'text-slate-300'}>{cat?.label}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{award.laureates.map(l => l.name).join('、')}</span>
+                    <span className={`font-semibold ${cat?.color || 'text-neutral-300'}`}>
+                      {cat?.label}
+                    </span>
+                    <span aria-hidden="true" className="text-neutral-600">·</span>
+                    <span className="text-neutral-200 font-medium">
+                      {award.laureates.map(l => l.name).join('、')}
+                    </span>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3">
                     {award.interactiveSimulationId && (
                       <button
                         onClick={(e) => {
@@ -119,42 +129,42 @@ export const TimelineView: React.FC<Props> = ({
                             onOpenSimulation(award.interactiveSimulationId);
                           }
                         }}
-                        className="text-[11px] font-medium text-amber-400 hover:text-amber-300 flex items-center gap-1 bg-amber-500/10 hover:bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/30 transition-colors"
+                        className="apple-pill-btn text-xs sm:text-sm font-bold text-black bg-gradient-to-r from-amber-400 to-amber-300 hover:brightness-110 px-4 py-2 rounded-full shadow-md flex items-center gap-1.5 transition-all cursor-pointer"
                       >
-                        <Atom className="w-3 h-3 animate-spin" style={{ animationDuration: '6s' }} />
-                        <span>交互模拟沙盒</span>
+                        <Atom className="w-4 h-4 animate-spin" style={{ animationDuration: '6s' }} />
+                        <span>交互实验沙盒</span>
                       </button>
                     )}
-                    <span className="text-slate-500 group-hover/card:text-amber-400 transition-colors flex items-center">
-                      <ArrowUpRight className="w-4 h-4" />
+
+                    <span className="w-9 h-9 rounded-full bg-white/[0.08] group-hover/card:bg-white/20 flex items-center justify-center text-neutral-400 group-hover/card:text-white transition-all">
+                      <ArrowUpRight className="w-5 h-5" />
                     </span>
                   </div>
                 </div>
 
-                {/* Discovery Title */}
-                <h3 className="text-lg font-bold text-white group-hover/card:text-amber-300 transition-colors font-display">
+                {/* Discovery Title (Large, clear, authoritative) */}
+                <h3 className="text-2xl sm:text-3xl font-bold text-white group-hover/card:text-amber-200 transition-colors font-display tracking-tight leading-snug">
                   {award.discoveryTitle}
                 </h3>
 
-                {/* Summary */}
-                <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                {/* Summary (Enlarged to 17px for effortless readability) */}
+                <p className="mt-3.5 text-base sm:text-lg text-neutral-300 leading-relaxed font-normal">
                   {award.summary}
                 </p>
 
-                {/* Key Formula teaser if available */}
+                {/* Key Formula teaser */}
                 {award.keyFormula && (
-                  <div className="mt-3 inline-block px-2.5 py-1 rounded-md bg-slate-950/80 border border-slate-800 text-xs font-code text-cyan-300">
+                  <div className="mt-4 inline-block px-4 py-2 rounded-xl bg-black/70 border border-white/[0.12] text-sm sm:text-base font-code text-cyan-300 shadow-inner">
                     {award.keyFormula.latex}
                   </div>
                 )}
 
-                {/* Tags unboxed */}
-                <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
-                  {award.tags.map((tag, i) => (
-                    <React.Fragment key={tag}>
-                      <span>#{tag}</span>
-                      {i < award.tags.length - 1 && <span aria-hidden="true">·</span>}
-                    </React.Fragment>
+                {/* Tags */}
+                <div className="mt-6 flex flex-wrap items-center gap-2.5 text-xs sm:text-sm text-neutral-400 font-medium">
+                  {award.tags.map((tag) => (
+                    <span key={tag} className="px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.08]">
+                      #{tag}
+                    </span>
                   ))}
                 </div>
               </div>

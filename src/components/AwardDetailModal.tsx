@@ -47,40 +47,40 @@ export const AwardDetailModal: React.FC<Props> = ({ award, onClose, onOpenSimula
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md">
-      <div className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl flex flex-col">
-        {/* Sticky Header */}
-        <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl font-bold font-code text-amber-400">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-2xl">
+      <div className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#0D0D12] border border-white/15 shadow-2xl flex flex-col">
+        {/* Sticky Header - Apple Glass style */}
+        <div className="sticky top-0 z-20 flex items-center justify-between px-8 py-6 bg-[#0E0E14]/90 backdrop-blur-3xl border-b border-white/[0.12]">
+          <div className="flex items-center gap-4">
+            <span className="text-3xl sm:text-4xl font-black font-code text-amber-400 tracking-tight">
               {award.year}
             </span>
-            <div className="h-4 w-px bg-slate-700" />
-            <span className={`text-xs font-bold px-2 py-0.5 rounded border ${discInfo?.badge}`}>
+            <div className="h-7 w-px bg-white/20" />
+            <span className={`text-sm sm:text-base font-bold px-3.5 py-1 rounded-full border ${discInfo?.badge}`}>
               {discInfo?.label}
             </span>
-            <span className={`text-xs font-medium px-2 py-0.5 rounded border ${catInfo?.bgBadge || 'text-slate-300'}`}>
+            <span className={`text-xs sm:text-sm font-semibold px-3 py-1 rounded-full border ${catInfo?.bgBadge || 'text-neutral-300'}`}>
               {catInfo?.label}
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               onClick={handleToggleSpeech}
-              className={`p-2 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors ${
+              className={`apple-pill-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
                 isSpeaking
-                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                  ? 'bg-amber-400 text-black shadow-lg shadow-amber-500/30'
+                  : 'bg-white/10 text-white hover:bg-white/20 border border-white/10'
               }`}
-              title={isSpeaking ? '停止朗读' : '朗读颁奖词与原理解读'}
+              title={isSpeaking ? '停止朗读' : '朗读官方颁奖词与原理解读'}
             >
-              {isSpeaking ? <VolumeX className="w-4 h-4 text-amber-400" /> : <Volume2 className="w-4 h-4 text-slate-300" />}
-              <span className="hidden sm:inline">{isSpeaking ? '停止朗读' : '语音导览'}</span>
+              {isSpeaking ? <VolumeX className="w-4 h-4 text-black" /> : <Volume2 className="w-4 h-4 text-white" />}
+              <span>{isSpeaking ? '停止朗读' : '语音导览'}</span>
             </button>
 
             <button
               onClick={handleClose}
-              className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="p-3 rounded-full bg-white/10 text-neutral-400 hover:text-white hover:bg-white/20 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -88,41 +88,41 @@ export const AwardDetailModal: React.FC<Props> = ({ award, onClose, onOpenSimula
         </div>
 
         {/* Content Body */}
-        <div className="p-6 space-y-6">
+        <div className="p-8 sm:p-10 space-y-9">
           {/* Main Title & One-line Summary */}
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white font-display">
+            <h2 className="text-3xl sm:text-5xl font-black text-white font-display tracking-tight leading-tight">
               {award.discoveryTitle}
             </h2>
-            <p className="mt-2 text-sm text-amber-200/90 leading-relaxed bg-amber-500/10 p-3 rounded-xl border border-amber-500/20">
+            <div className="mt-5 p-6 rounded-3xl bg-amber-500/[0.08] border border-amber-500/25 text-lg sm:text-xl text-amber-100 leading-relaxed font-normal shadow-inner">
               {award.summary}
-            </p>
+            </div>
           </div>
 
           {/* Laureates Row */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
+            <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-400 mb-4">
               获奖科学家 (LAUREATES)
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {award.laureates.map((l, idx) => (
                 <div
                   key={idx}
-                  className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 flex items-start gap-3"
+                  className="p-5 rounded-3xl bg-black/60 border border-white/[0.1] flex items-start gap-4 hover:border-white/20 transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500/20 to-slate-800 border border-amber-500/30 flex items-center justify-center font-display text-amber-300 font-bold shrink-0 text-sm">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400/20 to-white/5 border border-amber-400/30 flex items-center justify-center font-display text-amber-300 font-black shrink-0 text-lg shadow-sm">
                     {l.name.slice(0, 1)}
                   </div>
                   <div className="min-w-0">
-                    <div className="text-sm font-semibold text-white truncate">{l.name}</div>
+                    <div className="text-base sm:text-lg font-bold text-white truncate">{l.name}</div>
                     {l.nativeName && (
-                      <div className="text-[11px] text-slate-400 truncate">{l.nativeName}</div>
+                      <div className="text-xs sm:text-sm text-neutral-400 truncate mt-0.5">{l.nativeName}</div>
                     )}
-                    <div className="text-[11px] text-slate-500 mt-0.5">
+                    <div className="text-xs sm:text-sm text-neutral-300 mt-1 font-medium">
                       {l.country} · {l.birthDeath}
                     </div>
                     {l.affiliation && (
-                      <div className="text-[10px] text-slate-400 truncate mt-0.5">{l.affiliation}</div>
+                      <div className="text-xs text-neutral-400 truncate mt-0.5">{l.affiliation}</div>
                     )}
                   </div>
                 </div>
@@ -131,31 +131,31 @@ export const AwardDetailModal: React.FC<Props> = ({ award, onClose, onOpenSimula
           </div>
 
           {/* Official Nobel Citation */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/80 space-y-2">
-            <div className="flex items-center gap-1.5 text-xs text-amber-400 font-medium">
-              <Sparkles className="w-3.5 h-3.5" />
+          <div className="p-7 sm:p-8 rounded-3xl bg-black/70 border border-white/[0.12] space-y-4">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-amber-400 font-bold uppercase tracking-wider">
+              <Sparkles className="w-4.5 h-4.5" />
               <span>官方授奖词 (NOBEL CITATION)</span>
             </div>
-            <p className="text-sm text-slate-200 italic font-serif leading-relaxed">
+            <p className="text-lg sm:text-xl text-white italic font-serif leading-relaxed">
               “{award.citationZh}”
             </p>
-            <p className="text-xs text-slate-500 italic font-serif">
+            <p className="text-sm sm:text-base text-neutral-400 italic font-serif leading-relaxed">
               “{award.citationEn}”
             </p>
           </div>
 
           {/* Interactive Simulation Sandbox CTA if available */}
           {award.interactiveSimulationId && (
-            <div className="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-cyan-500/10 to-slate-900 border border-amber-500/30 flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shrink-0">
-                  <Atom className="w-5 h-5 animate-spin" style={{ animationDuration: '8s' }} />
+            <div className="p-7 rounded-3xl bg-gradient-to-r from-amber-500/15 via-indigo-500/15 to-purple-500/15 border border-amber-400/35 flex flex-wrap items-center justify-between gap-5">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-400 shrink-0">
+                  <Atom className="w-7 h-7 animate-spin" style={{ animationDuration: '8s' }} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-white">
+                  <h4 className="text-lg sm:text-xl font-bold text-white">
                     该重大发现配有可调参数的真实实验模拟沙盒！
                   </h4>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-base text-neutral-300 mt-1">
                     立刻进入交互沙盒，动手调节微观/宏观参数并观测实验反应。
                   </p>
                 </div>
@@ -166,66 +166,66 @@ export const AwardDetailModal: React.FC<Props> = ({ award, onClose, onOpenSimula
                     onOpenSimulation(award.interactiveSimulationId);
                   }
                 }}
-                className="px-4 py-2 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-semibold text-xs flex items-center gap-1.5 transition-colors shadow-sm"
+                className="apple-pill-btn px-7 py-3.5 rounded-full bg-white hover:bg-neutral-100 text-black font-bold text-sm sm:text-base flex items-center gap-2 transition-all shadow-xl shadow-white/10 cursor-pointer"
               >
                 <span>启动专属实验模拟</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-4.5 h-4.5" />
               </button>
             </div>
           )}
 
-          {/* 4 Deep Historical & Scientific Sections */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* 4 Deep Historical & Scientific Sections - Enlarged font sizes */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* 1. Historical Impasse */}
-            <div className="p-4 rounded-xl bg-slate-950/40 border border-slate-800 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-semibold text-amber-300">
-                <BookOpen className="w-4 h-4 text-amber-400" />
+            <div className="p-6 rounded-3xl bg-black/60 border border-white/[0.1] space-y-3">
+              <div className="flex items-center gap-2.5 text-base font-bold text-amber-300">
+                <BookOpen className="w-5 h-5 text-amber-400" />
                 <span>时代背景与前夜困境</span>
               </div>
-              <p className="text-xs leading-relaxed text-slate-300">
+              <p className="text-base text-neutral-200 leading-relaxed font-normal">
                 {award.historicalContext}
               </p>
             </div>
 
             {/* 2. Experimental Breakthrough */}
-            <div className="p-4 rounded-xl bg-slate-950/40 border border-slate-800 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-semibold text-cyan-300">
-                <Wrench className="w-4 h-4 text-cyan-400" />
+            <div className="p-6 rounded-3xl bg-black/60 border border-white/[0.1] space-y-3">
+              <div className="flex items-center gap-2.5 text-base font-bold text-cyan-300">
+                <Wrench className="w-5 h-5 text-cyan-400" />
                 <span>突破性巧思与实验装置</span>
               </div>
-              <p className="text-xs leading-relaxed text-slate-300">
+              <p className="text-base text-neutral-200 leading-relaxed font-normal">
                 {award.breakthroughMethod}
               </p>
             </div>
 
             {/* 3. Key Formula & Theoretical Meaning */}
-            <div className="p-4 rounded-xl bg-slate-950/40 border border-slate-800 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-300">
-                <Atom className="w-4 h-4 text-emerald-400" />
+            <div className="p-6 rounded-3xl bg-black/60 border border-white/[0.1] space-y-3">
+              <div className="flex items-center gap-2.5 text-base font-bold text-emerald-300">
+                <Atom className="w-5 h-5 text-emerald-400" />
                 <span>核心原理与理论机制</span>
               </div>
               {award.keyFormula ? (
-                <div className="space-y-1.5">
-                  <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 font-code text-sm text-amber-300 text-center">
+                <div className="space-y-2.5">
+                  <div className="p-4 rounded-2xl bg-neutral-900 border border-white/[0.12] font-code text-lg text-amber-300 text-center shadow-inner">
                     {award.keyFormula.latex}
                   </div>
-                  <div className="text-[11px] text-slate-400 font-medium">{award.keyFormula.label}</div>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <div className="text-xs sm:text-sm text-neutral-400 font-semibold">{award.keyFormula.label}</div>
+                  <p className="text-base text-neutral-200 leading-relaxed font-normal">
                     {award.keyFormula.explanation}
                   </p>
                 </div>
               ) : (
-                <p className="text-xs text-slate-400">奠定了现代科学坚实的研究范式与生命/物质理解。</p>
+                <p className="text-base text-neutral-300 leading-relaxed font-normal">奠定了现代科学坚实的研究范式与生命/物质理解。</p>
               )}
             </div>
 
             {/* 4. Modern Technological Application */}
-            <div className="p-4 rounded-xl bg-slate-950/40 border border-slate-800 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-semibold text-purple-300">
-                <Cpu className="w-4 h-4 text-purple-400" />
+            <div className="p-6 rounded-3xl bg-black/60 border border-white/[0.1] space-y-3">
+              <div className="flex items-center gap-2.5 text-base font-bold text-purple-300">
+                <Cpu className="w-5 h-5 text-purple-400" />
                 <span>改变世界的现代技术赋能</span>
               </div>
-              <p className="text-xs leading-relaxed text-slate-300">
+              <p className="text-base text-neutral-200 leading-relaxed font-normal">
                 {award.modernApplication}
               </p>
             </div>
@@ -233,12 +233,12 @@ export const AwardDetailModal: React.FC<Props> = ({ award, onClose, onOpenSimula
 
           {/* Historical Anecdote / Trivia */}
           {award.trivia && (
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
-              <div className="flex items-center gap-1.5 text-xs text-rose-400 font-medium">
-                <HelpCircle className="w-3.5 h-3.5" />
+            <div className="p-6 rounded-3xl bg-black/70 border border-white/[0.12] space-y-2.5">
+              <div className="flex items-center gap-2.5 text-base text-rose-400 font-bold">
+                <HelpCircle className="w-5 h-5" />
                 <span>历史趣闻与群星轶事</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-base text-neutral-200 leading-relaxed font-normal">
                 {award.trivia}
               </p>
             </div>

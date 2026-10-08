@@ -22,37 +22,37 @@ export const GalleryView: React.FC<Props> = ({
   });
 
   return (
-    <div className="space-y-6">
-      {/* Header filter */}
-      <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+    <div className="space-y-8">
+      {/* Header bar - Apple frosted container */}
+      <div className="p-7 rounded-3xl bg-[#1C1C1E]/70 border border-white/[0.12] backdrop-blur-2xl flex flex-wrap items-center justify-between gap-5">
         <div>
-          <h3 className="text-base font-semibold text-white flex items-center gap-2">
-            <Award className="w-4 h-4 text-amber-400" />
-            诺贝尔自然科学奖 · 重大发现展厅矩阵
+          <h3 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3 font-display tracking-tight">
+            <Award className="w-7 h-7 text-amber-400" />
+            重大科学发现 · 殿堂展厅矩阵
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-base text-neutral-300 mt-1.5 font-normal">
             涵盖物理、化学、生理学或医学三大领域群星与划时代突破
           </p>
         </div>
 
-        {/* Filter buttons */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-950 rounded-lg border border-slate-800 text-xs">
+        {/* Filter buttons - Apple pill style */}
+        <div className="flex items-center gap-2 p-1.5 bg-black/80 rounded-full border border-white/[0.12] text-sm sm:text-base">
           <button
             onClick={() => setLevelFilter('all')}
-            className={`px-3 py-1.5 rounded-md transition-colors ${
+            className={`px-5 py-2.5 rounded-full font-semibold transition-all cursor-pointer ${
               levelFilter === 'all'
-                ? 'bg-amber-400 text-slate-950 font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-white text-black shadow-lg scale-102'
+                : 'text-neutral-400 hover:text-white'
             }`}
           >
             全部精选 ({awards.length})
           </button>
           <button
             onClick={() => setLevelFilter('milestone_only')}
-            className={`px-3 py-1.5 rounded-md transition-colors ${
+            className={`px-5 py-2.5 rounded-full font-semibold transition-all cursor-pointer ${
               levelFilter === 'milestone_only'
-                ? 'bg-amber-400 text-slate-950 font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-white text-black shadow-lg scale-102'
+                : 'text-neutral-400 hover:text-white'
             }`}
           >
             仅范式革命级 (★)
@@ -60,8 +60,8 @@ export const GalleryView: React.FC<Props> = ({
         </div>
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {/* Grid - Apple Bento Card layout with larger text */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
         {filtered.map((award) => {
           const cat = CATEGORY_LABELS[award.category];
           const disc = DISCIPLINE_LABELS[award.discipline];
@@ -70,42 +70,42 @@ export const GalleryView: React.FC<Props> = ({
             <div
               key={award.id}
               onClick={() => onSelectAward(award)}
-              className="p-5 rounded-2xl bg-slate-900/70 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all cursor-pointer flex flex-col justify-between group shadow-sm hover:shadow-xl hover:shadow-slate-950/60"
+              className="apple-card p-8 rounded-3xl flex flex-col justify-between group cursor-pointer border border-white/[0.09] hover:border-white/30"
             >
               <div>
                 {/* Top card metadata */}
-                <div className="flex items-center justify-between text-xs text-slate-400 mb-2.5">
-                  <div className="flex items-center gap-2">
-                    <span className="font-code font-bold text-amber-400 text-sm">
-                      {award.year} 年
+                <div className="flex items-center justify-between text-sm sm:text-base text-neutral-400 mb-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="font-code font-black text-amber-400 text-xl">
+                      {award.year}
                     </span>
-                    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${disc?.badge}`}>
+                    <span className={`text-xs sm:text-sm font-bold px-3 py-0.5 rounded-full border ${disc?.badge}`}>
                       {disc?.short}
                     </span>
                   </div>
-                  <span className={`text-[11px] font-medium ${cat?.color || 'text-slate-300'}`}>
+                  <span className={`text-xs sm:text-sm font-semibold ${cat?.color || 'text-neutral-300'}`}>
                     {cat?.label}
                   </span>
                 </div>
 
-                {/* Discovery Title */}
-                <h4 className="text-base font-bold text-white group-hover:text-amber-300 transition-colors font-display line-clamp-2">
+                {/* Discovery Title (Larger font, bold, Apple style) */}
+                <h4 className="text-xl sm:text-2xl font-bold text-white group-hover:text-amber-200 transition-colors font-display tracking-tight leading-snug line-clamp-2">
                   {award.discoveryTitle}
                 </h4>
 
                 {/* Laureates */}
-                <div className="text-xs text-slate-400 mt-1.5 truncate">
+                <div className="text-base font-semibold text-neutral-200 mt-2.5 truncate">
                   {award.laureates.map(l => l.name).join('、')}
                 </div>
 
-                {/* Summary */}
-                <p className="mt-3 text-xs text-slate-300 line-clamp-3 leading-relaxed">
+                {/* Summary (Enlarged and relaxed line-height) */}
+                <p className="mt-4 text-base text-neutral-300 line-clamp-3 leading-relaxed font-normal">
                   {award.summary}
                 </p>
               </div>
 
               {/* Bottom Card Footer */}
-              <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+              <div className="mt-7 pt-4 border-t border-white/[0.1] flex items-center justify-between text-sm sm:text-base">
                 {award.interactiveSimulationId ? (
                   <button
                     onClick={(e) => {
@@ -114,20 +114,20 @@ export const GalleryView: React.FC<Props> = ({
                         onOpenSimulation(award.interactiveSimulationId);
                       }
                     }}
-                    className="text-[11px] font-medium text-amber-400 hover:text-amber-300 flex items-center gap-1 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30 transition-colors"
+                    className="apple-pill-btn text-xs sm:text-sm font-bold text-black bg-gradient-to-r from-amber-400 to-amber-300 hover:brightness-110 px-4 py-2 rounded-full flex items-center gap-1.5 transition-all shadow-md cursor-pointer"
                   >
-                    <Atom className="w-3 h-3 animate-spin" style={{ animationDuration: '6s' }} />
-                    <span>交互模拟沙盒</span>
+                    <Atom className="w-4 h-4 animate-spin" style={{ animationDuration: '6s' }} />
+                    <span>交互实验沙盒</span>
                   </button>
                 ) : (
-                  <span className="text-[11px] text-slate-500">
+                  <span className="text-xs sm:text-sm text-neutral-400 font-medium">
                     {award.laureates[0]?.country}
                   </span>
                 )}
 
-                <span className="text-slate-400 group-hover:text-amber-300 flex items-center gap-0.5 text-xs">
+                <span className="text-sm sm:text-base font-semibold text-neutral-300 group-hover:text-white flex items-center gap-1.5 transition-colors">
                   <span>深度解读</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <ArrowUpRight className="w-4.5 h-4.5" />
                 </span>
               </div>
             </div>
